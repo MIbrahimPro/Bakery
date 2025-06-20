@@ -15,6 +15,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // existing routes...
 app.use("/categories", require("./routes/categories"));
 app.use("/items", require("./routes/items"));
+app.use("/contests", require("./routes/contests"));
 app.use("/order", require("./routes/orders"));
 app.use("/auth", require("./routes/auth"));
 app.use("/gallery", require("./routes/gallery"));
@@ -24,6 +25,7 @@ app.use("/staff", require("./routes/staff"));
 // new routes:
 app.use("/users", require("./routes/users"));
 app.use("/general", require("./routes/general"));
+app.use("/search", require("./routes/search"));
 
 app.use((req, res) => {
     res.status(404).json({ message: "Endpoint not found" });

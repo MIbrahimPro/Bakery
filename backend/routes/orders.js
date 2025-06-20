@@ -7,7 +7,7 @@ const { authenticateToken, requireAdmin } = require("../middlewares/auth");
 const router = express.Router();
 
 // POST /order
-router.post("/order", async (req, res) => {
+router.post("/", async (req, res) => {
     const { userId, items, deliveryLocation, paymentMethod } = req.body;
     // items: [{ itemId, quantity }]
     const detailed = await Promise.all(
@@ -56,7 +56,7 @@ router.get("/this-order/:id", authenticateToken, async (req, res) => {
 
 // GET /order/all-orders
 router.get("/all-orders", authenticateToken, requireAdmin, async (req, res) => {
-    const orders = await Order.find();
+    const orders = await Order.find().populate("user", "email");
     res.json(orders);
 });
 

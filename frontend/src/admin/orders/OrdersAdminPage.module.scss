@@ -1,0 +1,50 @@
+.ordersAdminPage {
+    padding: 32px;
+}
+.ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff8f2;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(179, 51, 128, 0.07);
+}
+.ordersTable th,
+.ordersTable td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+.ordersTable th {
+    background: #ffd9cc;
+    color: #b33380;
+    font-weight: 600;
+}
+.ordersTable tr:last-child td {
+    border-bottom: none;
+}
+.statusSelect {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #b33380;
+}
+.deleteBtn {
+    color: #fff;
+    background: #e57373;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.deleteBtn:hover {
+    background: #b33380;
+}
+.successMsg {
+    color: green;
+    margin-top: 16px;
+}
+.errorMsg {
+    color: red;
+    margin-top: 16px;
+}

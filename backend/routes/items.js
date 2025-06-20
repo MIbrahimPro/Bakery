@@ -43,7 +43,7 @@ router.post(
     uploadItemImage,
     async (req, res) => {
         const data = { ...req.body };
-        if (req.file) data.image = req.file.filename;
+        if (req.file) data.image = `/uploads/items/${req.file.filename}`;
         const item = new Item(data);
         await item.save();
         res.status(201).json(item);
@@ -58,7 +58,7 @@ router.put(
     uploadItemImage,
     async (req, res) => {
         const update = { ...req.body };
-        if (req.file) update.image = req.file.filename;
+        if (req.file) update.image = `/uploads/items/${req.file.filename}`;
         const item = await Item.findByIdAndUpdate(req.params.id, update, {
             new: true,
         }).populate("category", "name");

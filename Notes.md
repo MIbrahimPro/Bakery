@@ -29,6 +29,7 @@
 
 -   name
 -   image
+-   description
 
 ### 3. Items
 
@@ -335,8 +336,3 @@ all the refrenced items are given along, like instead of only the category id, w
     -   Deletes a contest by ID.
     -   DELETE
     -   admin
-
-THERE IS MORE COMMING UP
-THE CONTESTS
-
-ASK THEM TO REMOVE CHAT BOT

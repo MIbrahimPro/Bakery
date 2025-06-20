@@ -18,7 +18,7 @@ const configSchema = new mongoose.Schema(
             yearsOfOperation: { type: Number, default: 0 },
             employeesCount: { type: Number, default: 0 },
             bakedKilograms: { type: Number, default: 0 },
-            destinationsCount: { type: Number, default: 0 }, // or an array: [String]
+            destinationsCount: { type: Number, default: 0 },
         },
         mapEmbedUrl: { type: String },
     },

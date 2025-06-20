@@ -114,7 +114,7 @@ const Login = () => {
                     )}
                     <div style={{ marginTop: "1rem" }}>
                         Don't have an account?{" "}
-                        <a href="/signup" className="login">
+                        <a href="/SignUp Page" className="login">
                             <u>Click here to sign up!</u>
                         </a>
                     </div>

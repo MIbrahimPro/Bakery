@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./partyprops.scss";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../CartContext";
 
 const PartyProps = () => {
     const [category, setCategory] = useState(null);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { addToCart } = useCart();
+    const [quantities, setQuantities] = useState({});
 
     useEffect(() => {
         axios
@@ -63,6 +66,16 @@ const PartyProps = () => {
                                     type="number"
                                     name="quantity"
                                     min="1"
+                                    value={quantities[item._id] || 1}
+                                    onChange={(e) =>
+                                        setQuantities((q) => ({
+                                            ...q,
+                                            [item._id]: Math.max(
+                                                1,
+                                                Number(e.target.value)
+                                            ),
+                                        }))
+                                    }
                                     style={{
                                         borderRadius: "4px",
                                         color: "#5bb6bf",
@@ -73,6 +86,18 @@ const PartyProps = () => {
                                 <button
                                     type="button"
                                     className="btn btn-secondary btn-sm"
+                                    onClick={() => {
+                                        const qty = quantities[item._id] || 1;
+                                        for (let i = 0; i < qty; i++) {
+                                            addToCart({
+                                                id: item._id,
+                                                name: item.name,
+                                                price: item.price,
+                                                imageUrl:
+                                                    item.image || item.imageUrl,
+                                            });
+                                        }
+                                    }}
                                 >
                                     Add to cart
                                 </button>

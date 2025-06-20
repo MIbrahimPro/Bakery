@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCart } from "../../CartContext";
+import { useAdmin } from "../../AdminContext";
 import "./navbar.scss"; // Adjust the path if needed
 
 const NAVBAR_COLORS = {
@@ -46,6 +48,8 @@ const Navbar = () => {
     const [propsId, setPropsId] = useState(null);
     const location = useLocation();
     const navigate = useNavigate();
+    const { items } = useCart();
+    const { isAdmin } = useAdmin();
 
     // Set navbar and body color based on route
     const navbarColor = NAVBAR_COLORS[location.pathname] || "#ee0e98";
@@ -82,7 +86,7 @@ const Navbar = () => {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (search.trim()) {
-            navigate(`/Menu?search=${encodeURIComponent(search)}`);
+            navigate(`/search?q=${encodeURIComponent(search)}`);
         }
     };
 
@@ -130,25 +134,42 @@ const Navbar = () => {
                     ))}
                 </div>
             </div>
+            {/* Admin Dropdown */}
+            {isAdmin && (
+                <div className="drop_down" style={{ display: "inline-block" }}>
+                    <button className="dropdown_btn" type="button">
+                        Admin <i className="fa fa-caret-down"></i>
+                    </button>
+                    <div className="drop-content">
+                        <a href="/admin/items">Manage Items</a>
+                        <a href="/admin/orders">Manage Orders</a>
+                        <a href="/admin/users">Manage Users</a>
+                        <a href="/admin/staff">Manage Kitchen</a>
+                        <a href="/admin/gallery">Manage Gallery</a>
+                        <a href="/admin/general">General Info Editor</a>
+                        <a href="/admin/cooking-videos">
+                            Manage Cooking Videos
+                        </a>
+                        <a href="/admin/contests">Manage Contests</a>
+                    </div>
+                </div>
+            )}
             <a href="/KitchenPage">Our Kitchen</a>
             {propsId && <a href="/PartyProps">Props</a>}
             <a href="/Gallery">Gallery</a>
             <a href="/FAQ" target="_blank" rel="noopener noreferrer">
                 FAQ
             </a>
-            <a
-                href="#cart"
-                style={{ float: "right" }}
-                data-toggle="modal"
-                data-target="#cart"
-            >
+            <a href="/Cart" style={{ float: "right" }}>
                 <i className="fa fa-shopping-cart"></i>
-                <span className="cart-items">( 0 )</span>
+                <span className="cart-items">
+                    ( {items.reduce((sum, i) => sum + i.quantity, 0)} )
+                </span>
             </a>
             <a
-                href="/SignUp Page"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={
+                    localStorage.getItem("token") ? "/Profile" : "/SignUp Page"
+                }
                 style={{ float: "right" }}
             >
                 <i className="fa fa-user"></i>

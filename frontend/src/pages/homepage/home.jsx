@@ -35,7 +35,10 @@ const Home = () => {
             .get("/categories/stats/today")
             .then((res) => setPoll(res.data || []));
         axios.get("/items/random2").then((res) => setSpecials(res.data || []));
-        axios.get("/gallery/limited").then((res) => setGallery(res.data || []));
+        axios.get("/gallery/limited").then((res) => {
+            console.log(res.data || []);
+            setGallery(res.data || []);
+        });
         axios.get("/general").then((res) => {
             setAnalytics(res.data.analytics);
             setMapUrl(res.data.mapEmbedUrl);

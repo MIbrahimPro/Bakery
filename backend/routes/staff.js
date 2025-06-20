@@ -25,7 +25,8 @@ router.post(
     requireAdmin,
     uploadStaffImage,
     async (req, res) => {
-        const data = { ...req.body, pictureUrl: req.file.filename };
+        const data = { ...req.body };
+        if (req.file) data.pictureUrl = `/uploads/staff/${req.file.filename}`;
         const s = new Staff(data);
         await s.save();
         res.status(201).json(s);
@@ -39,13 +40,21 @@ router.put(
     requireAdmin,
     uploadStaffImage,
     async (req, res) => {
-        const update = { ...req.body };
-        if (req.file) update.pictureUrl = req.file.filename;
-        const s = await Staff.findByIdAndUpdate(req.params.id, update, {
-            new: true,
-        });
-        if (!s) return res.status(404).json({ message: "Not found" });
-        res.json(s);
+        try {
+            const update = { ...req.body };
+            if (req.file)
+                update.pictureUrl = `/uploads/staff/${req.file.filename}`;
+            const s = await Staff.findByIdAndUpdate(req.params.id, update, {
+                new: true,
+            });
+            if (!s) return res.status(404).json({ message: "Not found" });
+            res.json(s);
+        } catch (err) {
+            res.status(500).json({
+                message: "Update failed",
+                error: err.message,
+            });
+        }
     }
 );
 

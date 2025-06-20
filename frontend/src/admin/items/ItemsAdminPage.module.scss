@@ -1,0 +1,66 @@
+.itemsAdminPage {
+    padding: 32px;
+}
+.itemsTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff8f2;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(179, 51, 128, 0.07);
+}
+.itemsTable th,
+.itemsTable td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+.itemsTable th {
+    background: #ffd9cc;
+    color: #b33380;
+    font-weight: 600;
+}
+.itemsTable tr:last-child td {
+    border-bottom: none;
+}
+.editBtn,
+.deleteBtn {
+    color: #fff;
+    background: #b33380;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: background 0.2s;
+}
+.deleteBtn {
+    background: #e57373;
+}
+.editBtn:hover,
+.deleteBtn:hover {
+    background: #370617;
+}
+.addBtn {
+    background: #ffd9cc;
+    color: #b33380;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.addBtn:hover {
+    background: #b33380;
+    color: #fff;
+}
+.successMsg {
+    color: green;
+    margin-top: 16px;
+}
+.errorMsg {
+    color: red;
+    margin-top: 16px;
+}

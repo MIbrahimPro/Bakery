@@ -1,0 +1,97 @@
+.cookingVideosAdminPage {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 32px 28px 40px 28px;
+}
+
+.videoForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 32px;
+    align-items: center;
+}
+
+.videoForm input[type="text"],
+.videoForm input[type="file"] {
+    flex: 1 1 200px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.videoForm button {
+    background: #f38e1a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.videoForm button:hover {
+    background: #cb997e;
+}
+
+.videoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    background: #faf9f6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.videoTable th,
+.videoTable td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.videoTable th {
+    background: #f5deda;
+    font-weight: 600;
+}
+
+.videoTable tr:last-child td {
+    border-bottom: none;
+}
+
+.editBtn,
+.deleteBtn {
+    margin-right: 8px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.editBtn {
+    background: #74c69d;
+    color: #fff;
+}
+
+.deleteBtn {
+    background: #ee0e98;
+    color: #fff;
+}
+
+.errorMsg {
+    color: #ee0e98;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.successMsg {
+    color: #74c69d;
+    margin-top: 10px;
+    font-weight: 500;
+}

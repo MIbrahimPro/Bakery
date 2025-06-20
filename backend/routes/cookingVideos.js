@@ -26,7 +26,9 @@ router.post(
     uploadCookingVideo,
     async (req, res) => {
         const { title, description } = req.body;
-        const videoUrl = req.file.filename;
+        const videoUrl = req.file
+            ? `/uploads/cooking/${req.file.filename}`
+            : null;
         const v = new CVideo({ title, description, videoUrl });
         await v.save();
         res.status(201).json(v);
@@ -41,7 +43,16 @@ router.put(
     uploadCookingVideo,
     async (req, res) => {
         const update = { ...req.body };
-        if (req.file) update.videoUrl = req.file.filename;
+        // If a new file is uploaded, update the videoUrl
+        if (req.file) {
+            update.videoUrl = `/uploads/cooking/${req.file.filename}`;
+        } else if (req.body.keepOldVideo === "true") {
+            // Remove videoUrl from update so it doesn't overwrite
+            delete update.videoUrl;
+        } else {
+            // If neither file nor keepOldVideo, clear the videoUrl (optional)
+            // delete update.videoUrl;
+        }
         const v = await CVideo.findByIdAndUpdate(req.params.id, update, {
             new: true,
         });

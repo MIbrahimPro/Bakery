@@ -9,7 +9,7 @@ const router = express.Router();
 // POST /contests/post
 router.post("/post", uploadContestImage, async (req, res) => {
     const { title, description, userId } = req.body;
-    const imageUrl = req.file?.filename;
+    const imageUrl = req.file ? `/uploads/contests/${req.file.filename}` : null;
     const c = new Contest({ title, description, imageUrl, user: userId });
     await c.save();
     res.status(201).json(c);
@@ -37,7 +37,8 @@ router.put(
     uploadContestImage,
     async (req, res) => {
         const update = { ...req.body };
-        if (req.file) update.imageUrl = req.file.filename;
+        if (req.file)
+            update.imageUrl = `/uploads/contests/${req.file.filename}`;
         const c = await Contest.findByIdAndUpdate(req.params.id, update, {
             new: true,
         });

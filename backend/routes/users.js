@@ -21,19 +21,30 @@ router.put("/me/update-name", authenticateToken, async (req, res) => {
 // PUT  /users/me/change-password
 router.put("/me/change-password", authenticateToken, async (req, res) => {
     const { oldPassword, newPassword } = req.body;
+    console.log(
+        "[CHANGE PASSWORD] user:",
+        req.user && req.user.email,
+        "body:",
+        req.body
+    );
     if (!req.user || !req.user.password) {
+        console.log("[CHANGE PASSWORD] No user or password");
         return res.status(400).json({ message: "User or password not found" });
     }
     if (!oldPassword || !newPassword) {
+        console.log("[CHANGE PASSWORD] Missing old or new password");
         return res
             .status(400)
             .json({ message: "Old and new password are required" });
     }
     const match = await bcrypt.compare(oldPassword, req.user.password);
-    if (!match)
+    if (!match) {
+        console.log("[CHANGE PASSWORD] Old password incorrect");
         return res.status(400).json({ message: "Old password incorrect" });
+    }
     req.user.password = await bcrypt.hash(newPassword, 12);
     await req.user.save();
+    console.log("[CHANGE PASSWORD] Password changed for user:", req.user.email);
     res.json({ message: "Password changed" });
 });
 
@@ -66,6 +77,11 @@ router.delete("/me/address/:addressId", authenticateToken, async (req, res) => {
 // GET   /users/me/addresses
 router.get("/me/addresses", authenticateToken, async (req, res) => {
     res.json(req.user.locations);
+});
+
+// GET /users/me/is-admin
+router.get("/me/is-admin", authenticateToken, (req, res) => {
+    res.json({ isAdmin: req.user.role === "admin" });
 });
 
 /**

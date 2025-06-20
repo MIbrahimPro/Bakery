@@ -17,8 +17,7 @@ async function authenticateToken(req, res, next) {
 
     try {
         const payload = jwt.verify(token, JWT_SECRET);
-        // attach user to req
-        req.user = await User.findById(payload.id).select("-password");
+        req.user = await User.findById(payload.id);
         if (!req.user) throw new Error("User not found");
         next();
     } catch (err) {

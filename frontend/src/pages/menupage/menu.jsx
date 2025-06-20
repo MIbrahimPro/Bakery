@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./menu.scss";
 import { useSearchParams } from "react-router-dom";
+import { useCart } from "../../CartContext";
 
 const Menu = () => {
     const [searchParams] = useSearchParams();
@@ -10,6 +11,7 @@ const Menu = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         if (!categoryId) return;
@@ -58,7 +60,18 @@ const Menu = () => {
                         <p className="item-price">₹{item.price}</p>
                         <p className="description">{item.description}</p>
                         <p>
-                            <button>Add to Cart</button>
+                            <button
+                                onClick={() =>
+                                    addToCart({
+                                        id: item._id,
+                                        name: item.name,
+                                        price: item.price,
+                                        imageUrl: item.image || item.imageUrl,
+                                    })
+                                }
+                            >
+                                Add to Cart
+                            </button>
                         </p>
                     </div>
                 ))}

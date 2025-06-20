@@ -32,7 +32,7 @@ router.post(
     uploadGalleryImage,
     async (req, res) => {
         const { title, description } = req.body;
-        const image = req.file.filename;
+        const image = `/uploads/gallery/${req.file.filename}`;
         const item = new Gallery({ title, description, imageUrl: image });
         await item.save();
         res.status(201).json(item);
@@ -47,7 +47,7 @@ router.put(
     uploadGalleryImage,
     async (req, res) => {
         const update = { ...req.body };
-        if (req.file) update.imageUrl = req.file.filename;
+        if (req.file) update.imageUrl = `/uploads/gallery/${req.file.filename}`;
         const g = await Gallery.findByIdAndUpdate(req.params.id, update, {
             new: true,
         });

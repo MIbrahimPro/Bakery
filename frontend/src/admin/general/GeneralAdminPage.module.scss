@@ -1,0 +1,115 @@
+.generalAdminPage {
+    padding: 32px;
+    background: #fff8f2;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 32px auto;
+    box-shadow: 0 2px 16px #f7e7d7;
+}
+.generalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 8px #f7e7d7;
+}
+.formRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+}
+.formRow label {
+    min-width: 120px;
+    font-weight: 600;
+    color: #b36b00;
+}
+.generalForm input,
+.generalForm textarea {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #e0b97d;
+    background: #fff8f2;
+    font-size: 1rem;
+    min-width: 180px;
+}
+.generalForm textarea {
+    min-width: 320px;
+    min-height: 60px;
+}
+.buttonRow {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+.editBtn,
+.saveBtn,
+.cancelBtn {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+.editBtn {
+    background: #ffe0b2;
+    color: #b36b00;
+}
+.saveBtn {
+    background: #b2dfdb;
+    color: #00695c;
+}
+.cancelBtn {
+    background: #ffcdd2;
+    color: #b71c1c;
+}
+.faqForm {
+    display: flex;
+    gap: 12px;
+    margin: 18px 0 8px 0;
+}
+.addFaqBtn {
+    background: #ffe0b2;
+    color: #b36b00;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.faqList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+}
+.faqList li {
+    background: #fff8f2;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.deleteFaqBtn {
+    background: #ffcdd2;
+    color: #b71c1c;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 16px;
+}
+.successMsg {
+    color: #388e3c;
+    margin-top: 16px;
+}
+.errorMsg {
+    color: #d32f2f;
+    margin-top: 16px;
+}
