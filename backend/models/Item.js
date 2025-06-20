@@ -1,5 +1,6 @@
 // models/Item.js
 const mongoose = require("mongoose");
+const imageCleanup = require("../middlewares/imageCleanup");
 
 const itemSchema = new mongoose.Schema(
     {
@@ -15,5 +16,7 @@ const itemSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+itemSchema.plugin(imageCleanup, { field: "image", folder: "items" });
 
 module.exports = mongoose.model("Item", itemSchema);

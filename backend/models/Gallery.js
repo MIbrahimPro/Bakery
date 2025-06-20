@@ -1,5 +1,6 @@
 // models/Gallery.js
 const mongoose = require("mongoose");
+const imageCleanup = require("../middlewares/imageCleanup");
 
 const gallerySchema = new mongoose.Schema(
     {
@@ -9,5 +10,7 @@ const gallerySchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+gallerySchema.plugin(imageCleanup, { field: "imageUrl", folder: "gallery" });
 
 module.exports = mongoose.model("Gallery", gallerySchema);

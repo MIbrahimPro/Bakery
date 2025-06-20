@@ -11,6 +11,12 @@ router.get("/all", async (req, res) => {
     res.json(await Gallery.find());
 });
 
+// GET /gallery/limited
+router.get("/limited", async (req, res) => {
+    const items = await Gallery.find().limit(20);
+    res.json(items);
+});
+
 // GET /gallery/:id
 router.get("/:id", async (req, res) => {
     const g = await Gallery.findById(req.params.id);
@@ -56,7 +62,7 @@ router.delete(
     authenticateToken,
     requireAdmin,
     async (req, res) => {
-        await Gallery.findByIdAndDelete(req.params.id);
+        await Gallery.findOneAndDelete({ _id: req.params.id });
         res.json({ message: "Deleted" });
     }
 );

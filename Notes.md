@@ -8,8 +8,6 @@
 
 ### 1. Main Information
 
--   Admin Username
--   Admin password
 -   Instagram link
 -   Facebook link
 -   Youtube link
@@ -87,6 +85,13 @@
 -   Video
 -   title
 -   describtion
+
+### 9. Contests
+
+-   title
+-   describtion and recipe
+-   image
+-   user ref
 
 ## Api Design
 
@@ -297,16 +302,39 @@ all the refrenced items are given along, like instead of only the category id, w
     -   delete
     -   admin
 
-### 8. General Database Table Routes
+### 8. General Database Table Routes(/general)
 
--   /general
+-   /get
     -   Retrieves all information from the general table.
     -   GET
     -   Public
--   /general/change
+-   /change
     -   Updates an existing information.
     -   PUT
     -   Admin
+
+### 9. Contest Routes (/contests)
+
+-   /post
+    -   Creates a new contest.
+    -   POST
+    -   Public
+-   /get
+    -   Retrieves all contests.
+    -   GET
+    -   admin
+-   /get/:id
+    -   Retrieves a specific contest by ID.
+    -   GET
+    -   Public
+-   /update/:id
+    -   Updates a contest by ID.
+    -   PUT
+    -   admin
+-   /delete/:id
+    -   Deletes a contest by ID.
+    -   DELETE
+    -   admin
 
 THERE IS MORE COMMING UP
 THE CONTESTS

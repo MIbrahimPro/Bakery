@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
         password: { type: String, required: true }, // hash before save!
         role: {
             type: String,
-            enum: ["customer", "admin", "staff"],
+            enum: ["customer", "admin"],
             default: "customer",
         },
         locations: [addressSchema],

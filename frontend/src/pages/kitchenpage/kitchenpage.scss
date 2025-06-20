@@ -1,0 +1,143 @@
+#heading {
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin: 5% 5% 0% 5%;
+    padding: 2%;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+}
+
+#heading h1 {
+    font-family: "Parisienne", cursive;
+    font-size: 40px;
+    text-shadow: 2px 2px #40916c;
+}
+
+#heading h4 {
+    font-style: italic;
+    font-weight: lighter;
+    color: grey;
+}
+
+#chefs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem 2rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 5% 5%;
+    padding: 2% 2%;
+    justify-items: center;
+    align-items: stretch;
+}
+
+.blink {
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    0% {
+        color: #b33380;
+    }
+    100% {
+        color: white;
+    }
+}
+
+.image {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    min-width: 220px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s;
+}
+
+.image:hover {
+    box-shadow: 0 8px 24px rgba(36, 158, 170, 0.18);
+    transform: translateY(-6px) scale(1.03);
+}
+
+.image-img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px 12px 0 0;
+    background: #eee;
+}
+
+@media (max-width: 900px) {
+    #chefs {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem 1rem;
+    }
+    .image-img {
+        height: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    #chefs {
+        grid-template-columns: 1fr;
+        margin: 2% 0%;
+        padding: 2% 0%;
+        gap: 1.5rem 0;
+    }
+    .image {
+        max-width: 98vw;
+    }
+    .image-img {
+        height: 140px;
+    }
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Quicksand", sans-serif;
+    opacity: 0;
+    transition: opacity 0.25s;
+    padding: 0% 2%;
+}
+
+.image-overlay > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.image:hover .image-overlay,
+.image:focus-within .image-overlay {
+    opacity: 1;
+}
+
+.image:hover .image-overlay > *,
+.image:focus-within .image-overlay > * {
+    transform: translateY(0);
+}
+
+.image-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.image-discription {
+    font-size: 1.25em;
+    margin-top: 0.25em;
+}

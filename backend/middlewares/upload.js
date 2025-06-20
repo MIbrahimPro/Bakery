@@ -39,19 +39,19 @@ module.exports = {
     uploadCategoryImage: multer({
         storage: createStorage("categories"),
         fileFilter: imageFileFilter,
-        limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max
+        limits: { fileSize: 15 * 1024 * 1024 }, // 5MB max
     }).single("image"),
 
     uploadItemImage: multer({
         storage: createStorage("items"),
         fileFilter: imageFileFilter,
-        limits: { fileSize: 5 * 1024 * 1024 },
+        limits: { fileSize: 15 * 1024 * 1024 },
     }).single("image"),
 
     uploadGalleryImage: multer({
         storage: createStorage("gallery"),
         fileFilter: imageFileFilter,
-        limits: { fileSize: 5 * 1024 * 1024 },
+        limits: { fileSize: 15 * 1024 * 1024 },
     }).single("image"),
 
     uploadStaffImage: multer({
@@ -65,4 +65,10 @@ module.exports = {
         fileFilter: videoFileFilter,
         limits: { fileSize: 50 * 1024 * 1024 }, // 50MB max
     }).single("video"),
+
+    uploadContestImage: multer({
+        storage: createStorage("contests"),
+        fileFilter: imageFileFilter,
+        limits: { fileSize: 15 * 1024 * 1024 }, // 5MB max
+    }).single("image"),
 };

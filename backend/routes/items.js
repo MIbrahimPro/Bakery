@@ -13,7 +13,13 @@ router.get("/all", async (req, res) => {
     res.json(items);
 });
 
-// GET /items/:id
+// GET /items/random2
+router.get("/random2", async (req, res) => {
+    const items = await Item.aggregate([{ $sample: { size: 2 } }]);
+    res.json(items);
+});
+
+// GET /items/:ids
 router.get("/:id", async (req, res) => {
     const item = await Item.findById(req.params.id).populate(
         "category",
@@ -25,10 +31,7 @@ router.get("/:id", async (req, res) => {
 
 // GET /items/category/:id
 router.get("/category/:id", async (req, res) => {
-    const items = await Item.find({ category: req.params.id }).populate(
-        "category",
-        "name"
-    );
+    const items = await Item.find({ category: req.params.id });
     res.json(items);
 });
 
@@ -70,7 +73,7 @@ router.delete(
     authenticateToken,
     requireAdmin,
     async (req, res) => {
-        await Item.findByIdAndDelete(req.params.id);
+        await Item.findOneAndDelete({ _id: req.params.id });
         res.json({ message: "Item deleted" });
     }
 );

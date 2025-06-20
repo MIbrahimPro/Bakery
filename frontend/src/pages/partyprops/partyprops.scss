@@ -1,0 +1,72 @@
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#heading {
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin: 3% 3% 0% 3%;
+    padding: 2%;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+}
+
+#heading h1 {
+    font-family: "Parisienne", cursive;
+    font-size: 50px;
+    text-shadow: 2px 2px #249eaa;
+}
+
+#heading h4 {
+    font-style: italic;
+    font-weight: lighter;
+    color: grey;
+}
+
+.props {
+    max-width: 300px;
+    width: 300px;
+    margin: 10px 10px 10px 10px;
+    background-color: #5bb6bf;
+    height: 367px;
+    flex-direction: column;
+}
+
+.pic {
+    height: 170px;
+    width: 98%;
+    background-color: white;
+    margin: 3px 3px 3px 3px;
+}
+
+.props:hover {
+    transform: translateX(10px) translateY(-10px);
+}
+
+.image {
+    height: 170px;
+    width: 100%;
+}
+
+.text {
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    font-family: "Times New Roman ", Times, serif;
+    font-size: 20px;
+    margin: 5% 5% 5px 5%;
+    padding: 2%;
+}
+
+.name {
+    text-align: center;
+    font-family: "system-ui";
+    font-size: 24px;
+    color: black;
+    font-weight: bold;
+}

@@ -1,5 +1,6 @@
 // models/Staff.js
 const mongoose = require("mongoose");
+const imageCleanup = require("../middlewares/imageCleanup");
 
 const staffSchema = new mongoose.Schema(
     {
@@ -10,5 +11,7 @@ const staffSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+staffSchema.plugin(imageCleanup, { field: "pictureUrl", folder: "staff" });
 
 module.exports = mongoose.model("Staff", staffSchema);

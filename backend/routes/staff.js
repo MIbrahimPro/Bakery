@@ -55,7 +55,7 @@ router.delete(
     authenticateToken,
     requireAdmin,
     async (req, res) => {
-        await Staff.findByIdAndDelete(req.params.id);
+        await Staff.findOneAndDelete({ _id: req.params.id });
         res.json({ message: "Deleted" });
     }
 );

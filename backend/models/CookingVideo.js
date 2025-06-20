@@ -1,5 +1,6 @@
 // models/CookingVideo.js
 const mongoose = require("mongoose");
+const imageCleanup = require("../middlewares/imageCleanup");
 
 const cookingVideoSchema = new mongoose.Schema(
     {
@@ -10,4 +11,9 @@ const cookingVideoSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("CookingVideo", cookingVideoSchema);
+cookingVideoSchema.plugin(imageCleanup, {
+    field: "videoUrl",
+    folder: "cookingVideos",
+});
+
+module.exports = mongoose.model("Cooking", cookingVideoSchema);

@@ -56,7 +56,7 @@ router.delete(
     authenticateToken,
     requireAdmin,
     async (req, res) => {
-        await CVideo.findByIdAndDelete(req.params.id);
+        await CVideo.findOneAndDelete({ _id: req.params.id });
         res.json({ message: "Deleted" });
     }
 );

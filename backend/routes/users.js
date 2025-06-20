@@ -21,6 +21,14 @@ router.put("/me/update-name", authenticateToken, async (req, res) => {
 // PUT  /users/me/change-password
 router.put("/me/change-password", authenticateToken, async (req, res) => {
     const { oldPassword, newPassword } = req.body;
+    if (!req.user || !req.user.password) {
+        return res.status(400).json({ message: "User or password not found" });
+    }
+    if (!oldPassword || !newPassword) {
+        return res
+            .status(400)
+            .json({ message: "Old and new password are required" });
+    }
     const match = await bcrypt.compare(oldPassword, req.user.password);
     if (!match)
         return res.status(400).json({ message: "Old password incorrect" });
@@ -48,7 +56,9 @@ router.put("/me/address/:addressId", authenticateToken, async (req, res) => {
 
 // DELETE /users/me/address/:addressId
 router.delete("/me/address/:addressId", authenticateToken, async (req, res) => {
-    req.user.locations.id(req.params.addressId)?.remove();
+    req.user.locations = req.user.locations.filter(
+        (loc) => loc._id.toString() !== req.params.addressId
+    );
     await req.user.save();
     res.json(req.user.locations);
 });

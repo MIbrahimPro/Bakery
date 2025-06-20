@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffc996;
+}
+
+.heading {
+    background-image: url(https://wallpaperaccess.com/full/1462400.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 15rem;
+    width: 100%;
+    margin-top: 0;
+    opacity: 0.8;
+    background-attachment: fixed;
+}
+
+.faq {
+    text-align: center;
+    padding: 5.5rem;
+    color: rgb(0, 0, 0);
+    text-shadow: 2px 2px rgb(243, 159, 159);
+    font-family: "Cinzel", serif;
+    font-size: 3rem;
+}
+
+.parent {
+    padding: 1rem;
+    width: 50rem;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.child {
+    margin: 1rem;
+    padding: 1rem;
+    font-size: 1.3rem;
+    position: relative;
+}
+
+.fas {
+    position: absolute;
+    right: 0;
+    transition: transform 0.3s;
+}
+
+.rot {
+    transform: rotate(180deg);
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.ans {
+    width: 48rem;
+    position: relative;
+    left: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.ques {
+    background: #ffe9d6;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+@media only screen and (max-width: 900px) {
+    .parent {
+        width: 90vw;
+    }
+    .ans {
+        width: 88vw;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .faq {
+        padding: 2.5rem;
+        font-size: 2rem;
+    }
+    .parent {
+        width: 98vw;
+        padding: 0.5rem;
+    }
+    .ans {
+        width: 96vw;
+        left: 0;
+        font-size: 1rem;
+    }
+}

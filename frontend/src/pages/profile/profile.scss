@@ -1,0 +1,111 @@
+/* PROFILE PAGE STYLES */
+.profile-page {
+    min-height: 100vh;
+    background: linear-gradient(120deg, #ffece6 60%, #ffd9cc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Cinzel", serif;
+
+    .profile-container {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+        padding: 2.5rem 3rem;
+        min-width: 350px;
+        max-width: 500px;
+        width: 100%;
+    }
+    .profile-title {
+        font-family: "Great Vibes", cursive;
+        font-size: 3.5rem;
+        color: #b33380;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    .profile-section {
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .profile-label {
+        font-size: 1.2rem;
+        color: #b33380;
+        margin-bottom: 0.2rem;
+    }
+    .profile-value {
+        font-size: 1.1rem;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .profile-inline-form {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .profile-input {
+        border: 1px solid #b33380;
+        border-radius: 6px;
+        padding: 0.4rem 0.7rem;
+        font-size: 1rem;
+        outline: none;
+        margin-bottom: 0.2rem;
+    }
+    .profile-btn {
+        background: #ffd9cc;
+        color: #b33380;
+        border: none;
+        border-radius: 6px;
+        padding: 0.4rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .profile-btn:hover {
+        background: #ffece6;
+    }
+    .profile-subtitle {
+        font-size: 1.3rem;
+        color: #b33380;
+        margin-bottom: 0.5rem;
+    }
+    .profile-address-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 0.5rem;
+    }
+    .profile-address-item {
+        background: #ffece6;
+        border-radius: 6px;
+        padding: 0.5rem 0.7rem;
+        margin-bottom: 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1rem;
+    }
+    .profile-success {
+        color: green;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    .profile-error {
+        color: red;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    @media (max-width: 600px) {
+        .profile-container {
+            padding: 1rem 0.5rem;
+            min-width: 0;
+            max-width: 98vw;
+        }
+        .profile-title {
+            font-size: 2.2rem;
+        }
+    }
+}
