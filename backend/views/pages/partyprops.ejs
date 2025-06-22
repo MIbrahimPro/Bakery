@@ -1,0 +1,56 @@
+
+<link rel="stylesheet" href="/css/partyprops.css" />
+
+<div id="heading">
+  <h1><%= category?.name || "Party Props" %></h1>
+  <h4><u>"LET'S PARTY LIKE GATSBY."</u></h4>
+</div>
+
+<div id="main">
+  <% if (!items || items.length === 0) { %>
+    <p style="padding: 32px;">No party props available at the moment.</p>
+  <% } else { %>
+    <% items.forEach(function(item) { %>
+      <div class="props">
+        <div class="pic">
+          <img
+            class="image"
+            src="<%= item.image || item.imageUrl %>"
+            alt="<%= item.name %>"
+          />
+        </div>
+        <div class="text">
+          <div class="name">
+            <%= item.name %><br />
+          </div>
+          <br />
+          <form action="/views/cart/add" method="POST">
+            <input type="hidden" name="itemId" value="<%= item._id %>" />
+            <input type="hidden" name="itemName" value="<%= item.name %>" />
+            <input type="hidden" name="itemPrice" value="<%= item.price %>" />
+            <input
+              type="hidden"
+              name="itemImage"
+              value="<%= item.image || item.imageUrl %>"
+            />
+
+            <div>
+              Price of 1 piece: <%= item.price %>rs<br />
+              Quantity:&nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                name="quantity"
+                min="1"
+                value="1"
+                class="quantity-input"
+              />
+              <button type="submit" class="btn btn-secondary btn-sm">
+                Add to cart
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    <% }); %>
+  <% } %>
+</div>

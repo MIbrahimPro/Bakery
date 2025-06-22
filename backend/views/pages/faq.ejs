@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/css/FAQ.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<div style="background: #ffc996; min-height: 100vh;">
+    <div class="heading">
+        <h1 class="faq">FREQUENTLY ASKED QUESTIONS!</h1>
+    </div>
+    <div class="parent">
+        <% if (faqs && faqs.length > 0) { %>
+            <% faqs.forEach(function(q, idx) { %>
+                <div class="ques">
+                    <div class="child" style="position: relative;">
+                        <b><%= q.question %></b>
+                        <i
+                            class="fa-solid fa-chevron-down toggle-icon"
+                            data-index="<%= idx %>"
+                            style="
+                                cursor: pointer;
+                                position: absolute;
+                                right: 0;
+                            "
+                        ></i>
+                    </div>
+                    <div class="ans hide" id="ans-<%= idx %>">
+                        <%= q.answer %>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p style="text-align: center; padding: 20px;">No FAQs available at the moment.</p>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleIcons = document.querySelectorAll('.toggle-icon');
+
+        toggleIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const idx = this.dataset.index;
+                const answerDiv = document.getElementById(`ans-${idx}`);
+
+                // Toggle visibility
+                answerDiv.classList.toggle('hide');
+                answerDiv.classList.toggle('show');
+
+                // Toggle rotation class for the icon
+                this.classList.toggle('rot');
+            });
+        });
+    });
+</script>
+
+<% if (typeof footerdata !== 'undefined' && footerdata) { %>
+    <% } %>

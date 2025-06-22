@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="/css/gallery-admin.css">
+
+<div class="gallery-admin-page">
+  <h2>Manage Gallery</h2>
+
+  <% if (messages.error.length) { %>
+    <div class="errorMsg"><%= messages.error[0] %></div>
+  <% } %>
+  <% if (messages.success.length) { %>
+    <div class="successMsg"><%= messages.success[0] %></div>
+  <% } %>
+
+  <!-- Form for Add / Edit -->
+  <form
+    class="galleryForm"
+    action="<%= editingId ? `/views/gallery/admin/change/${editingId}?_method=PUT` : '/views/gallery/admin/add' %>"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <input
+      type="text"
+      name="title"
+      placeholder="Title"
+      value="<%= formData?.title || '' %>"
+      required
+    />
+    <input
+      type="text"
+      name="description"
+      placeholder="Description"
+      value="<%= formData?.description || '' %>"
+    />
+    <input
+      type="file"
+      name="image"
+      accept="image/*"
+    />
+    <button type="submit">
+      <%= editingId ? "Update" : "Add" %> Gallery Item
+    </button>
+    <% if (editingId) { %>
+      <button
+        type="button"
+        onclick="window.location.href='/views/gallery/admin'"
+      >
+        Cancel
+      </button>
+    <% } %>
+  </form>
+
+  <!-- Table of items -->
+  <% if (gallery.length === 0) { %>
+    <div>No gallery items.</div>
+  <% } else { %>
+    <table class="galleryTable">
+      <thead>
+        <tr><th>Title</th><th>Description</th><th>Image</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <% gallery.forEach(g => { %>
+          <tr>
+            <td><%= g.title %></td>
+            <td><%= g.description %></td>
+            <td>
+              <% if (g.imageUrl) { %>
+                <img src="<%= g.imageUrl %>" alt="<%= g.title %>" class="galleryImg" />
+              <% } %>
+            </td>
+            <td>
+              <form
+                action="/views/gallery/admin/delete/<%= g._id %>?_method=DELETE"
+                method="POST"
+                style="display:inline"
+              >
+                <button class="deleteBtn">Delete</button>
+              </form>
+              <button
+                class="editBtn"
+                onclick="window.location.href='/views/gallery/admin?edit=<%= g._id %>'"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>

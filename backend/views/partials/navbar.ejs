@@ -1,0 +1,145 @@
+<div
+    class="navtop<%= showNavInitially ? ' responsive' : '' %>"
+    id="mynavTop"
+    style="background-color: <%= navbarColor %>"
+>
+    <a href="/views/Homepage">Home</a>
+    <div
+        class="drop_down"
+        onmouseenter="toggleDropdown(true, this)"
+        onmouseleave="toggleDropdown(false, this)"
+    >
+        <button
+            class="dropdown_btn"
+            type="button"
+            onclick="handleDropdownClick(this)"
+            aria-haspopup="true"
+            aria-expanded="false"
+        >
+            Items <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="drop-content">
+            <% categories.forEach(function(cat) { %>
+            <a
+                href="/views/<%= encodeURIComponent(cat.name) %>?category=<%= cat._id %>"
+                onclick="handleDropdownLinkClick(event, '<%= encodeURIComponent(cat.name) %>', '<%= cat._id %>')"
+            >
+                <%= cat.name %>
+            </a>
+            <% }); %>
+        </div>
+    </div>
+
+    <% if (isAdmin) { %>
+    <div class="drop_down" style="display: inline-block">
+        <button class="dropdown_btn" type="button">
+            Admin <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="drop-content">
+            <a href="/views/items/admin">Manage Items</a>
+            <a href="/views/orders/admin">Manage Orders</a>
+            <a href="/views/users/admin">Manage Users</a>
+            <a href="/views/staff/admin">Manage Kitchen</a>
+            <a href="/views/gallery/admin">Manage Gallery</a>
+            <a href="/views/general/admin">General Info Editor</a>
+            <a href="/views/cooking-videos/admin">Manage Cooking Videos</a>
+            <a href="/views/contests/admin">Manage Contests</a>
+        </div>
+    </div>
+    <% } %>
+
+    <a href="/views/kitchen">Our Kitchen</a>
+    <% if (propsId) { %>
+    <a href="/views/PartyProps">Props</a>
+    <% } %>
+    <a href="/views/Gallery">Gallery</a>
+    <a href="/views/FAQ" target="_blank" rel="noopener noreferrer"> FAQ </a>
+    <a href="/views/Cart" style="float: right">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-items"> (<%= totalCartItems %>) </span>
+    </a>
+    <a
+        href="<%= userLoggedIn ? '/views/Profile' : '/views/SignUp Page' %>"
+        style="float: right"
+    >
+        <i class="fa fa-user"></i>
+    </a>
+    <button
+        class="icon"
+        style="font-size: 15px"
+        onclick="handleNavToggle()"
+        aria-label="Toggle navigation"
+    >
+        &#9776;
+    </button>
+    <div class="search-container">
+        <form onsubmit="handleSearchSubmit(event)">
+            <input
+                type="text"
+                placeholder="Search"
+                name="search"
+                value="<%= initialSearch || '' %>"
+                oninput="currentSearch = this.value"
+            />
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Client-side state and functions for interactivity
+    let currentSearch = "<%= initialSearch || '' %>"; // Initialize from server
+    let isDropdownOpen = false; // Initial state
+
+    function handleNavToggle() {
+        const navTop = document.getElementById("mynavTop");
+        navTop.classList.toggle("responsive");
+    }
+
+    function toggleDropdown(show, element) {
+        const dropContent = element.querySelector(".drop-content");
+        const dropdownBtn = element.querySelector(".dropdown_btn");
+        if (show) {
+            dropContent.style.display = "block";
+            dropdownBtn.setAttribute("aria-expanded", "true");
+            isDropdownOpen = true;
+        } else {
+            dropContent.style.display = "none";
+            dropdownBtn.setAttribute("aria-expanded", "false");
+            isDropdownOpen = false;
+        }
+    }
+
+    // This is for the button click to explicitly open/close
+    function handleDropdownClick(button) {
+        const dropContent = button.nextElementSibling;
+        if (dropContent.style.display === "block") {
+            dropContent.style.display = "none";
+            button.setAttribute("aria-expanded", "false");
+            isDropdownOpen = false;
+        } else {
+            dropContent.style.display = "block";
+            button.setAttribute("aria-expanded", "true");
+            isDropdownOpen = true;
+        }
+    }
+
+    function handleSearchSubmit(event) {
+        event.preventDefault();
+        if (currentSearch.trim()) {
+            window.location.href = `/views/search?q=${encodeURIComponent(
+                currentSearch
+            )}`;
+        }
+    }
+
+    function handleDropdownLinkClick(event, categoryName, categoryId) {
+        event.preventDefault(); // Prevent default link behavior
+        window.location.href = `/views/${categoryName}?category=${categoryId}`;
+        // Optionally close the dropdown after clicking a link
+        const dropDown = event.target.closest(".drop_down");
+        toggleDropdown(false, dropDown);
+    }
+</script>

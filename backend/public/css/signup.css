@@ -1,0 +1,143 @@
+/* SIGNUP PAGE STYLES */
+.signup-page {
+    min-height: 100vh;
+    background-image: url("https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/1040595/1360/906/m1/fpnw/wm1/kdz6auqy0tlzwy7r56o0s6hwcmesntwruv9lbrs6trkftkhxjak4htlilpgt9a7c-.jpg?1456819327&s=d82d33a295a628b85e89d8ba2ea47d4a");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.signup-page .signup-container {
+    height: 92vh;
+    width: 40vw;
+    background: #ffece6;
+    margin-right: 4vw;
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.signup-page .signup-title {
+    height: 12vh;
+    width: 38.6vw;
+    background: #ffd9cc;
+    text-align: center;
+    padding: 1.5vh;
+    font-family: "Great Vibes", cursive;
+    font-size: 10vh;
+}
+
+.signup-page .signup-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: -2vh;
+    padding: 3rem 4rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.signup-page .field {
+    font-family: "Cinzel", serif;
+    font-size: 3vh;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.signup-page .inp {
+    margin-bottom: 1rem;
+    border: 0;
+    border-bottom: 0.25vh solid black;
+    border-left: 0.25vh solid black;
+    height: 4vh;
+    font-size: 2.7vh;
+    padding: 0 0.5rem;
+    background: #fff;
+    outline: none;
+}
+
+.signup-page .inp::placeholder {
+    font-size: 2.7vh;
+    text-align: center;
+}
+
+.signup-page .signup-btn {
+    font-size: 2.7vh;
+    align-self: stretch;
+    margin-bottom: 0.6rem;
+    background: #ffd9cc;
+    border: none;
+    padding: 0.7rem 0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.signup-page .signup-btn:hover {
+    background: #ffbfa3;
+}
+
+.signup-page .login {
+    color: #333;
+    transition: color 0.2s, font-weight 0.2s, font-size 0.2s;
+}
+
+.signup-page .login:hover {
+    color: red;
+    font-weight: bold;
+    font-size: 3.2vh;
+}
+
+.signup-page .signup-error {
+    color: red;
+    margin-bottom: 1rem;
+}
+
+.signup-page .signup-success {
+    color: green;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 75em) {
+    .signup-page .signup-container {
+        margin-right: 5vw;
+    }
+    .signup-page .signup-title {
+        width: 38.58vw;
+    }
+}
+@media only screen and (max-width: 70em) {
+    .signup-page .signup-container {
+        width: 42vw;
+    }
+    .signup-page .signup-title {
+        width: 38.5vw;
+    }
+    .signup-page .signup-btn {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 54em) {
+    .signup-page .signup-container {
+        width: 60vw;
+        margin-right: 0;
+    }
+    .signup-page .signup-title {
+        width: 55vw;
+    }
+}
+@media only screen and (max-width: 40em) {
+    .signup-page .signup-container {
+        width: 90vw;
+        margin: 2vh auto;
+    }
+    .signup-page .signup-title {
+        width: 85vw;
+    }
+    .signup-page .signup-form {
+        padding: 2rem 1rem;
+    }
+}

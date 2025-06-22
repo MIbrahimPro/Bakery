@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/css/menu.css">
+
+<% if (!categoryId) { %>
+    <div style="padding: 32px;">No category selected. Please select a category from the navigation.</div>
+<% } else if (error) { %>
+    <div style="padding: 32px; color: red;">Error: <%= error %></div>
+<% } else { %>
+    <div id="heading">
+        <h1><%= category?.name || "Category" %></h1>
+        <h4><%= category?.description || "" %></h4>
+    </div>
+    <div id="main">
+        <% if (items.length === 0) { %>
+            <div>No items found in this category.</div>
+        <% } else { %>
+            <% items.forEach(function(item) { %>
+                <div class="card" key="<%= item._id %>">
+                    <img
+                        src="<%= item.image %>"
+                        class="item-img"
+                        alt="<%= item.name %>"
+                    />
+                    <h1><%= item.name %></h1>
+                    <p class="item-price">₹<%= item.price %></p>
+                    <p class="description"><%= item.description %></p>
+                    <p>
+                        <form action="/views/cart/add" method="POST">
+                            <input type="hidden" name="itemId" value="<%= item._id %>">
+                            <input type="hidden" name="itemName" value="<%= item.name %>">
+                            <input type="hidden" name="itemPrice" value="<%= item.price %>">
+                            <input type="hidden" name="itemImage" value="<%= item.image || item.imageUrl %>">
+                            <button type="submit">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </p>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+<% } %>
+
+<% if (typeof footerdata !== 'undefined' && footerdata) { %>
+    <% } %>
+
+<% if (messages.error && messages.error.length > 0) { %>
+    <div class="message error-message" style="color: red; margin-top: 1rem; text-align: center;">
+        <%= messages.error[0] %>
+    </div>
+<% } %>
+<% if (messages.success && messages.success.length > 0) { %>
+    <div class="message success-message" style="color: green; margin-top: 1rem; text-align: center;">
+        <%= messages.success[0] %>
+    </div>
+<% } %>

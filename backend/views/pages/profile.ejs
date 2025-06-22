@@ -1,0 +1,167 @@
+<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<div class="profile-page">
+    <div class="profile-container">
+        <h1 class="profile-title">My Profile</h1>
+
+        <form action="/views/logout" method="POST" style="float: right; margin-bottom: 1rem;">
+            <button type="submit" class="profile-btn logout-btn">Logout</button>
+        </form>
+
+        <% if (messages.success && messages.success.length > 0) { %>
+            <div class="profile-success"><%= messages.success[0] %></div>
+        <% } %>
+        <% if (messages.error && messages.error.length > 0) { %>
+            <div class="profile-error"><%= messages.error[0] %></div>
+        <% } %>
+
+        <% if (user) { %>
+            <div class="profile-section">
+                <label class="profile-label">Name:</label>
+                <% if (editName) { %>
+                    <form action="/views/profile/update-name?_method=PUT" method="POST" class="profile-inline-form">
+                        <input
+                            type="text"
+                            name="name"
+                            value="<%= user.name %>"
+                            class="profile-input"
+                            required
+                        />
+                        <button type="submit" class="profile-btn">Save</button>
+                        <button type="button" class="profile-btn" onclick="window.location.href = '/profile';">
+                            Cancel
+                        </button>
+                    </form>
+                <% } else { %>
+                    <span class="profile-value">
+                        <%= user.name %>
+                        <button class="profile-btn edit-btn" onclick="window.location.href = '/profile?editName=true';">Edit</button>
+                    </span>
+                <% } %>
+            </div>
+
+            <div class="profile-section">
+                <label class="profile-label">Email:</label>
+                <span class="profile-value"><%= user.email %></span>
+            </div>
+
+            <div class="profile-section">
+                <form action="/views/profile/change-password?_method=PUT" method="POST" class="profile-inline-form">
+                    <label class="profile-label">Change Password:</label>
+                    <input
+                        type="password"
+                        name="oldPassword"
+                        placeholder="Old Password"
+                        class="profile-input"
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="newPassword"
+                        placeholder="New Password"
+                        class="profile-input"
+                        required
+                    />
+                    <button type="submit" class="profile-btn">Change</button>
+                </form>
+            </div>
+
+            <div class="profile-section">
+                <h2 class="profile-subtitle">Addresses</h2>
+                <ul class="profile-address-list">
+                    <% if (Array.isArray(addresses) && addresses.length > 0) { %>
+                        <% addresses.forEach(function(addr) { %>
+                            <li class="profile-address-item">
+                                <b><%= addr.title %>:</b> <%= addr.address %>
+                                <form action="/views/profile/address/<%= addr._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                    <button type="submit" class="profile-btn delete-btn">Delete</button>
+                                </form>
+                            </li>
+                        <% }); %>
+                    <% } else { %>
+                        <li class="no-data-message">No addresses found.</li>
+                    <% } %>
+                </ul>
+                <form action="/views/profile/address?_method=POST" method="POST" class="profile-inline-form">
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Title (e.g., Home, Office)"
+                        class="profile-input"
+                        required
+                    />
+                    <textarea
+                        name="address"
+                        placeholder="Full Address"
+                        rows="2"
+                        class="profile-input"
+                        required
+                    ></textarea>
+                    <button type="submit" class="profile-btn">Add Address</button>
+                </form>
+            </div>
+
+            <div class="profile-section">
+                <h2 class="profile-subtitle">Order History</h2>
+                <% if (Array.isArray(orders) && orders.length > 0) { %>
+                    <div class="profile-orders-list">
+                        <% orders.forEach(function(order) { %>
+                            <div class="profile-order-card">
+                                <div class="profile-order-header">
+                                    <b>Order ID:</b> <%= order._id %>
+                                    <span style="float: right;">
+                                        <b>Date:</b> <%= new Date(order.orderTime || order.createdAt).toLocaleString() %>
+                                    </span>
+                                </div>
+                                <div class="profile-order-details">
+                                    <div><b>Status:</b> <%= order.orderStatus %></div>
+                                    <div><b>Payment:</b> <%= order.paymentMethod %> (<%= order.paymentStatus %>)</div>
+                                    <div><b>Address:</b> <%= order.deliveryLocation?.title || 'N/A' %>: <%= order.deliveryLocation?.address || 'N/A' %></div>
+                                </div>
+                                <div class="profile-order-items">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Price</th>
+                                                <th>Qty</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (Array.isArray(order.items) && order.items.length > 0) { %>
+                                                <% order.items.forEach(function(it) { %>
+                                                    <tr>
+                                                        <td><%= it.name %></td>
+                                                        <td>
+                                                            ₹<%= it.price.toFixed(2) %>
+                                                        </td>
+                                                        <td><%= it.quantity %></td>
+                                                        <td>
+                                                            ₹<%= it.subTotal.toFixed(2) %>
+                                                        </td>
+                                                    </tr>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <tr><td colspan="4">No items in this order.</td></tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="profile-order-total">
+                                    <b>Total:</b> ₹<%= order.totalPrice.toFixed(2) %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <div class="no-data-message">No orders found.</div>
+                <% } %>
+            </div>
+        <% } else { %>
+            <div class="no-user-message">You are not logged in. Please <a href="/views/login">log in</a> to view your profile.</div>
+        <% } %>
+    </div>
+</div>

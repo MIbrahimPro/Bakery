@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="/css/participationform.css" />
+
+<div class="participation-whole">
+  <img
+    src="https://i.pinimg.com/564x/c0/69/8f/c0698faf591fc743fddefe9e06537f2c.jpg"
+    id="image"
+    alt="dessert"
+  />
+
+  <div class="participation-form">
+    <form
+      action="/views/participation"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <p class="text1">CONTEST PARTICIPATION</p>
+
+      <p class="text">
+        <u>Dessert's Name:</u>&nbsp;
+        <input
+          type="text"
+          name="title"
+          class="text2"
+          value="<%= formData?.title || '' %>"
+          required
+        />
+      </p>
+
+      <p class="text">
+        <u>Complete Recipe</u> :&nbsp;
+        <textarea
+          name="description"
+          class="text2"
+          rows="6"
+          style="resize: vertical; width: 80%;"
+          required
+        ><%= formData?.description || '' %></textarea>
+      </p>
+
+      <p class="text">
+        <u>Image of the Dessert</u>:&nbsp;
+        <input
+          type="file"
+          name="image"
+          class="text2"
+          accept="image/*"
+        />
+      </p>
+
+      <button
+        type="submit"
+        class="participation-btn"
+        <% if (loading) { %> disabled <% } %>
+      >
+        <%= loading ? "Submitting..." : "Submit" %>
+      </button>
+
+      <% if (messages.success) { %>
+        <div class="participation-success"><%= messages.success %></div>
+      <% } %>
+      <% if (messages.error) { %>
+        <div class="participation-error"><%= messages.error %></div>
+      <% } %>
+    </form>
+  </div>
+</div>

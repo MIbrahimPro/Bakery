@@ -1,0 +1,367 @@
+<link rel="stylesheet" href="/css/home.css" />
+
+<div class="homepage-root">
+    <div id="bakery-name">
+        <img src="/images/logo.jpg" alt="Bakery Logo" />
+    </div>
+
+    <% if (SLIDES && SLIDES.length > 0) { %>
+    <div class="slider">
+        <div class="slides">
+            <% SLIDES.forEach((src, idx) => { %>
+            <div
+                class="slide"
+                style="display: <%= idx === slide ? 'block' : 'none' %>;"
+            >
+                <img src="<%= src %>" alt="slide<%= idx + 1 %>" />
+            </div>
+            <% }); %>
+        </div>
+        <div class="navigation-manual">
+            <% SLIDES.forEach((_, idx) => { %>
+            <label
+                class="manual-btn"
+                style="background: <%= idx === slide ? 'grey' : 'transparent' %>;"
+                data-slide-index="<%= idx %>"
+            ></label>
+            <% }); %>
+        </div>
+    </div>
+    <% } %> <% if (categories && categories.length > 0) { %>
+    <div id="items-container">
+        <% categories.forEach(cat => { %>
+        <div
+            class="items"
+            onclick="window.location.href='/<%= cat.name %>?category=<%= cat._id %>'"
+            style="cursor: pointer"
+        >
+            <img
+                src="<%= cat.image || '/images/item1.jpg' %>"
+                alt="<%= cat.name %>"
+            />
+            <p class="item-names"><%= cat.name %></p>
+        </div>
+        <% }); %>
+    </div>
+    <% } %> <% if (propsCategory) { %>
+    <div id="props">
+        <img src="<%= propsCategory.image %>" alt="<%= propsCategory.name %>" />
+        <div id="props-text">
+            <a href="/PartyProps">
+                <h3>Party Props</h3>
+            </a>
+        </div>
+    </div>
+    <% } %>
+
+    <div class="flex-container">
+        <div class="flex-child">
+            <h1 class="blink">Today's Poll!</h1>
+            <p style="font-size: 20px">
+                Check the customer's opinion on our top items and select the
+                perfect one for you!
+            </p>
+            <% if (poll && poll.length > 0) { %>
+            <div class="poll1">
+                <% poll.forEach((item, idx) => { %>
+                <div
+                    id="div<%= idx + 1 %>"
+                    class="poll"
+                    style="height: <%= Math.max(50, item.count * 20) %>px"
+                >
+                    <span class="poll-label"><%= item.name %></span>
+                    <span class="poll-count"><%= item.count %></span>
+                </div>
+                <% }); %>
+            </div>
+            <% } %>
+            <p style="font-size: 18px">
+                <i>
+                    Order our top 3 rated items now and get
+                    <b>20% off</b>!
+                </i>
+            </p>
+            <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm"
+                onclick="document.getElementById('items-container').scrollIntoView({ behavior: 'smooth' })"
+            >
+                Order Now
+            </button>
+
+            <div id="new-item-container">
+                <h1 class="blink">SPECIALS!</h1>
+                <p style="font-size: 20px">
+                    We're always excited to serve our customers the latest in
+                    the trend and best in the quality. So, here we bring two new
+                    mouth watering special desserts for you!
+                </p>
+                <% if (specials && specials.length > 0) { %> <%
+                specials.forEach(item => { %>
+                <div class="newitem">
+                    <h1 id="special-heading"><%= item.name %></h1>
+                    <p style="font-size: 20px"><%= item.description %></p>
+                    <img
+                        src="<%= item.image %>"
+                        class="special-image"
+                        alt="<%= item.name %>"
+                    />
+                    <br />
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-sm"
+                    >
+                        Order Now
+                    </button>
+                </div>
+                <% }); %> <% } %>
+            </div>
+
+            <div id="new-item-container">
+                <h1 class="blink">Participate and Earn!</h1>
+                <i>
+                    <p style="font-size: 22px">
+                        "Find something you're passionate about and keep
+                        yourself tremendously interested in it."
+                        <br />
+                        -Julia Child
+                    </p>
+                </i>
+                <p style="font-size: 20px">
+                    Make any of the item found in a bakery and upload its recipe
+                    and picture; along with some other necessary personal
+                    details and send it to us to win exciting prizes!
+                    <br />
+                    <a
+                        href="/views/participation"
+                        class="participate"
+                        style="text-decoration: none; color: blue"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i>Click here for the participation form!</i>
+                    </a>
+                </p>
+                <img
+                    src="/images/static/part.jpg"
+                    class="special-image"
+                    alt="participate"
+                />
+            </div>
+        </div>
+
+        <div class="flex-child">
+            <div id="gallery">
+                <h1
+                    align="center"
+                    style="
+                        font-size: 3.5em;
+                        color: purple;
+                        margin: 2%;
+                        text-align: center;
+                        width: 100%;
+                    "
+                >
+                    <u>GALLERY</u>
+                </h1>
+                <% if (gallery && gallery.length > 0) { %>
+                <div class="gallery-pics">
+                    <% gallery.forEach((img, idx) => { %>
+                    <div
+                        class="pics"
+                        style="background-image: url('<%= img.imageUrl %>')"
+                        title="<%= img.title || `gallery${idx}` %>"
+                    ></div>
+                    <% }); %>
+                </div>
+                <% } %>
+                <br />
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-bg"
+                    style="margin-left: 10%"
+                    onclick="window.location.href='/views/Gallery'"
+                >
+                    View More
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="props">
+        <img
+            src="https://www.buzztime.com/business/wp-content/uploads/2017/09/kitchen-inspection-750-x-340.jpg"
+            alt="Our Kitchen"
+        />
+        <div id="props-text">
+            <a href="/KitchenPage">
+                <h3>Our Kitchen</h3>
+            </a>
+        </div>
+    </div>
+
+    <div id="about">
+        <h1 style="font-style: italic; text-align: center">
+            <b>Presence</b>
+        </h1>
+        <h4
+            style="
+                font-style: italic;
+                text-align: center;
+                color: grey;
+                font-size: 18px;
+            "
+        >
+            "Our aim is to continue enriching the global sweet market."
+        </h4>
+        <br />
+        <p style="text-align: justify">
+            Consisting of a team of field experts and talented management board,
+            we are collectively concentrating our effort to spread the goodness
+            of organically baked goods as far as possible. Over the course of
+            the production, we have been challenging ourselves every single
+            step. In search for a unique and fulfilling experience for our
+            customers, our sweet team has been sharing and discussing the tastes
+            and knowledge with our quality-demanding food experts from numerous
+            cafés, restaurants, and hotels worldwide. We are trying to smoothly
+            build a healthy, medium-sized company; placing emphasis on creating
+            and maintaining a warm relationships with our customers and business
+            partners.
+        </p>
+        <div></div>
+        <h1 style="font-style: italic; text-align: center">
+            <b>Values</b>
+        </h1>
+        <h4
+            style="
+                font-style: italic;
+                text-align: center;
+                color: grey;
+                font-size: 18px;
+            "
+        >
+            "We believe in uniqueness."
+        </h4>
+        <br />
+        <p style="text-align: justify">
+            Our philosophy is baked from the freshest of ingredients. We have
+            combined systematic and inspiring collaboration with our employees
+            by using the best raw materials and machines, together with
+            customers’ expectations, high technological approaches to producing
+            sweets our aspirations, as well as undying respect for quality and
+            safety. We believe that the results will always be absolutely unique
+            and fulfilling!
+        </p>
+        <div></div>
+        <div id="details-container">
+            <div class="details-child">
+                <h3 class="about-subheading">
+                    <b
+                        ><%= analytics && analytics.yearsOfOperation !==
+                        undefined ? analytics.yearsOfOperation : 0 %> years</b
+                    >
+                </h3>
+                <h4 class="subheading-content">
+                    delivering the unmatched
+                    <br />
+                    quality to all passionate
+                    <br />
+                    cake lovers.
+                </h4>
+            </div>
+            <div class="details-child">
+                <h3 class="about-subheading">
+                    <b
+                        ><%= analytics && analytics.employeesCount !== undefined
+                        ? analytics.employeesCount : 0 %> employees</b
+                    >
+                </h3>
+                <h4 class="subheading-content">
+                    producing the unique sweet
+                    <br />
+                    solutions delighting
+                    <br />
+                    customers' demands.
+                </h4>
+            </div>
+            <div class="details-child">
+                <h3 class="about-subheading">
+                    <b>
+                        <%= analytics && analytics.bakedKilograms !== undefined
+                        ? analytics.bakedKilograms.toLocaleString() : 0 %> Kg
+                    </b>
+                </h3>
+                <h4 class="subheading-content">
+                    of baked goodies adored,
+                    <br />
+                    eaten and appreciated
+                    <br />
+                    by customers.
+                </h4>
+            </div>
+            <div class="details-child">
+                <h3 class="about-subheading">
+                    <b>
+                        <%= analytics && analytics.destinationsCount !==
+                        undefined ? analytics.destinationsCount : 0 %>
+                        destinations
+                    </b>
+                </h3>
+                <h4 class="subheading-content">
+                    all around the world <br />
+                    taking pleasure
+                    <br />
+                     in our cakes.
+                </h4>
+            </div>
+            <div class="googlemap"></div>
+            <% if (mapUrl) { %>
+            <iframe
+                src="<%= mapUrl %>"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowFullScreen=""
+                loading="lazy"
+                title="Bakery Map"
+            ></iframe>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll(".slide");
+        const manualBtns = document.querySelectorAll(".manual-btn");
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? "block" : "none";
+            });
+            manualBtns.forEach((btn, i) => {
+                btn.style.background = i === index ? "grey" : "transparent";
+            });
+        }
+
+        // Automatic slide change
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }, 4000);
+
+        // Manual navigation
+        manualBtns.forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+                const index = parseInt(event.target.dataset.slideIndex);
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    });
+</script>

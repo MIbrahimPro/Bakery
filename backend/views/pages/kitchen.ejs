@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="/css/kitchen.css">
+
+<div>
+    <div id="heading">
+        <h1>Our Top Chefs</h1>
+        <h4>
+            "A recipe has no soul. You, as the cook, must bring soul to
+            the recipe."
+            <br />- Thomas Keller
+        </h4>
+    </div>
+    <div id="chefs">
+        <% if (chefs && chefs.length > 0) { %>
+            <% chefs.forEach(function(chef) { %>
+                <div class="image" key="<%= chef._id %>">
+                    <a href="#">
+                        <img
+                            class="image-img chef-image"
+                            src="<%= chef.pictureUrl %>"
+                            alt="<%= chef.name %>"
+                        />
+                        <div class="image-overlay">
+                            <div class="image-title"><%= chef.name %></div>
+                            <div
+                                style="
+                                    font-weight: bold;
+                                    margin-bottom: 0.5em;
+                                "
+                            >
+                                <%= chef.role %>
+                            </div>
+                            <p class="image-discription">
+                                <%= chef.description %>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No chefs found or unable to load chefs.</p>
+        <% } %>
+    </div>
+    <p
+        class="blink"
+        style="
+            font-family: serif;
+            color: purple;
+            font-size: 3em;
+            text-align: center;
+        "
+    >
+        <i>
+            <u>
+                The Chief Ingredient in yummy food is always <b>LOVE</b>
+            </u>
+        </i>
+    </p>
+    <div
+        style="
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2% 0;
+        "
+    >
+        <% if (videos && videos.length > 0) { %>
+            <% videos.forEach(function(video) { %>
+                <video
+                    key="<%= video._id %>"
+                    src="<%= video.videoUrl %>"
+                    controls
+                    autoplay
+                    muted
+                    height="50%"
+                    width="35%"
+                    style="
+                        margin: 2% 0 0 2%;
+                        border: 7px double black;
+                        background: #000;
+                    "
+                ></video>
+            <% }); %>
+        <% } else { %>
+            <p>No cooking videos found or unable to load videos.</p>
+        <% } %>
+    </div>
+
+    <% if (typeof footerdata !== 'undefined' && footerdata) { %>
+        <% } %>
+</div>

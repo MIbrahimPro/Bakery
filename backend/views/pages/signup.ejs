@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/css/signup.css" />
+
+<div class="signup-page">
+    <div id="signUp" class="signup-container">
+        <div
+            id="letsGo"
+            class="signup-title"
+            style="font-size: 10vh; font-family: 'Great Vibes', cursive"
+        >
+            Let's Go!!
+        </div>
+        <form
+            action="/views/SignUp%20Page"
+            method="POST"
+            autocomplete="off"
+            class="signup-form"
+        >
+            <label for="name" class="field">
+                <b>Name</b>
+                <span style="color: red">*</span>
+            </label>
+            <input
+                class="inp"
+                type="text"
+                name="name"
+                id="name"
+                pattern="[A-Za-z ]+"
+                title="Can only contain alphabets and spaces."
+                placeholder="Enter your Name"
+                size="35"
+                required
+                value="<%= typeof formData !== 'undefined' ? formData.name : '' %>"
+            />
+            <label for="email" class="field">
+                <b>Email</b>
+                <span style="color: red">*</span>
+            </label>
+            <input
+                class="inp"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your Email id"
+                size="35"
+                required
+                value="<%= typeof formData !== 'undefined' ? formData.email : '' %>"
+            />
+            <label for="password" class="field">
+                <b>Password</b>
+                <span style="color: red">*</span>
+            </label>
+            <input
+                class="inp"
+                type="password"
+                name="password"
+                id="password"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="At least 8 characters, one uppercase, one lowercase, and one number."
+                placeholder="Enter your Password"
+                size="35"
+                required
+            />
+            <button
+                type="submit"
+                class="btn signup-btn"
+                style="
+                    font-size: 2.7vh;
+                    align-self: stretch;
+                    margin-bottom: 0.6rem;
+                "
+            >
+                Sign Up
+            </button>
+
+            <% if (messages.error) { %>
+            <div class="signup-error" style="margin-bottom: 1rem">
+                <%= messages.error %>
+            </div>
+            <% } %> <% if (messages.success) { %>
+            <div class="signup-success" style="margin-bottom: 1rem">
+                <%= messages.success %>
+            </div>
+            <% } %>
+
+            <div style="margin-top: 1rem">
+                Already have an account?
+                <a href="/views/login" class="login">
+                    <u>Click here to login!</u>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

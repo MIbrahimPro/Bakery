@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="/css/checkout.css">
+
+<div class="checkout-page">
+  <h1>Checkout</h1>
+
+  <% if (messages.error && messages.error.length) { %>
+    <div class="checkout-message error"><%= messages.error[0] %></div>
+  <% } %>
+
+  <% if (cartItems.length === 0) { %>
+    <p>Your cart is empty. <a href="/views/menu">Go back to menu</a>.</p>
+  <% } else { %>
+    <form action="/views/place-order" method="POST">
+      
+      <!-- Order Summary -->
+      <section class="checkout-section">
+        <h2>Order Summary</h2>
+        <ul class="checkout-items">
+          <% cartItems.forEach(item => { %>
+            <li>
+              <%= item.name %> × <%= item.quantity %> = ₹<%= (item.price * item.quantity).toFixed(2) %>
+            </li>
+          <% }) %>
+        </ul>
+        <div class="checkout-total">
+          <strong>Total:</strong> ₹<%= cartTotal.toFixed(2) %>
+        </div>
+      </section>
+
+      <!-- Delivery Address -->
+      <section class="checkout-section">
+        <h2>Delivery Address</h2>
+        
+        <% if (addresses && addresses.length > 0) { %>
+          <div class="checkout-address-list">
+            <% addresses.forEach(addr => { %>
+              <label class="checkout-address-item">
+                <input
+                  type="radio"
+                  name="selectedAddressId"
+                  value="<%= addr._id %>"
+                  <%= addr._id.toString() === selectedAddressId ? "checked" : "" %>
+                  required
+                />
+                <span><strong><%= addr.title %>:</strong> <%= addr.address %></span>
+              </label>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <!-- Always show Add Address button -->
+        <button
+          type="button"
+          class="checkout-btn"
+          onclick="window.location.href='/views/profile'"
+        >
+          Add Address
+        </button>
+      </section>
+
+      <!-- Payment Method -->
+      <section class="checkout-section">
+        <h2>Payment Method</h2>
+        <div class="checkout-payment-methods">
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="cash"
+              <%= paymentMethod === 'cash' ? 'checked' : '' %>
+              required
+            />
+            Cash on Delivery
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="card"
+              <%= paymentMethod === 'card' ? 'checked' : '' %>
+            />
+            Card
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="online"
+              <%= paymentMethod === 'online' ? 'checked' : '' %>
+            />
+            Online
+          </label>
+        </div>
+      </section>
+
+      <button
+        type="submit"
+        class="checkout-btn checkout-placeorder"
+        <%= addresses.length === 0 ? 'disabled' : '' %>
+      >
+        Place Order
+      </button>
+    </form>
+  <% } %>
+</div>

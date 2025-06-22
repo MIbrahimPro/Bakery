@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/search-results.css">
+
+<div class="search-page">
+  <div id="heading">
+    <h1>Search Results</h1>
+    <h4>Searching for "<%= query %>"</h4>
+  </div>
+
+  <% if (messages.error && messages.error.length) { %>
+    <div class="alert alert-danger"><%= messages.error[0] %></div>
+  <% } %>
+
+  <% if (!query) { %>
+    <p>Please enter a search term.</p>
+  <% } else if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } else if (items.length === 0) { %>
+    <p>No items found for "<%= query %>".</p>
+  <% } else { %>
+    <div id="main">
+      <% items.forEach(function(item) { %>
+        <div class="card">
+          <% if (item.image || item.imageUrl) { %>
+            <img src="<%= item.image || item.imageUrl %>" class="item-img" alt="<%= item.name %>">
+          <% } %>
+          <h1><%= item.name %></h1>
+          <p class="item-price">₹<%= item.price.toFixed(2) %></p>
+          <p class="description"><%= item.description %></p>
+          <form action="/views/cart/add" method="POST">
+            <input type="hidden" name="itemId"    value="<%= item._id %>">
+            <input type="hidden" name="itemName"  value="<%= item.name %>">
+            <input type="hidden" name="itemPrice" value="<%= item.price %>">
+            <input type="hidden" name="itemImage" value="<%= item.image || item.imageUrl %>">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+</div>

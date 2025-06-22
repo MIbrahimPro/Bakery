@@ -1,0 +1,89 @@
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#heading {
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin: 5% 5% 0% 5%;
+    padding: 2%;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+}
+
+#heading h1 {
+    font-family: 'Parisienne', cursive;
+    font-size: 40px;
+    text-shadow: 2px 2px #deaaff;
+}
+
+#heading h4 {
+    font-style: italic;
+    font-weight: lighter;
+    color: grey;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 3%;
+    text-align: center;
+    background-color: white;
+    border: 1.5px solid black;
+    transition: 1s ease-in-out;
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    transition: 1s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 10px 10px 25px white;
+}
+
+.card button:hover {
+    opacity: 0.9;
+    background-color: #370617;
+}
+
+.description {
+    padding: 3%;
+}
+
+.item-img {
+    height: 250px;
+    width: 100%;
+}
+
+.item-price {
+    text-decoration: none;
+    color: brown;
+    position: relative;
+    top: -2%;
+    margin: 0 0 0 2%;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.price-dropdown {
+    text-decoration: none;
+    color: grey;
+    position: relative;
+    top: -5%;
+    margin: 0 0 0 2%;
+}

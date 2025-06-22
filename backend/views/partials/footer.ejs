@@ -1,0 +1,61 @@
+<div id="footer" style="background-color: <%= footerColor %>">
+    <div id="social-container">
+        <div class="footer__contact">
+            <i
+                ><%= footerdata && footerdata.contactNumber ?
+                footerdata.contactNumber : "+92 99999 88888" %></i
+            >
+        </div>
+        <div class="footer__social">
+            <ul class="horizontal-list text-center social-icons">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-pinterest fa-4x"></i>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="<%= footerdata && footerdata.instagramLink ? footerdata.instagramLink : '#' %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="<%= footerdata && footerdata.twitterLink ? footerdata.twitterLink : '#' %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="<%= footerdata && footerdata.youtubeLink ? footerdata.youtubeLink : '#' %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa fa-youtube"></i>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="<%= footerdata && footerdata.facebookLink ? footerdata.facebookLink : '#' %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer__mail">
+            <i
+                ><%= footerdata && footerdata.contactEmail ?
+                footerdata.contactEmail : "tresbakery@gmail.com" %></i
+            >
+        </div>
+    </div>
+</div>

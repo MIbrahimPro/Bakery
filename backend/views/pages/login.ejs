@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/css/signup.css" />
+
+<div class="signup-page">
+   
+    <div class="signup-container">
+     
+        <div class="signup-title" 
+            style=" font-size: 10vh; font-family: 'Great Vibes', cursive; " >
+            Welcome Back!
+        </div>
+        <form
+            action="/views/login"
+            method="POST"
+            autocomplete="off"
+            class="signup-form"
+
+        >
+            <label for="email" class="field">
+                <b>Email</b>
+                <span style="color: red">*</span>
+            </label>
+            <input
+                class="inp"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your Email id"
+                size="35"
+                required
+                value="<%= typeof formData !== 'undefined' ? formData.email : '' %>"
+            />
+            <label for="password" class="field">
+                <b>Password</b>
+                <span style="color: red">*</span>
+            </label>
+            <input
+                class="inp"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your Password"
+                size="35"
+                required
+            />
+            <button
+                type="submit"
+                class="btn signup-btn"
+
+                style=" font-size: 2.7vh; align-self: stretch; margin-bottom:
+                0.6rem; " 
+            > 
+            Login
+            </button>
+
+            <% if (messages.error) { %>
+            <div class="signup-error" style="margin-bottom: 1rem">
+                <%= messages.error %>
+            </div>
+            <% } %> <% if (messages.success) { %>
+            <div class="signup-success" style="margin-bottom: 1rem">
+                <%= messages.success %>
+            </div>
+            <% } %>
+
+            <div style="margin-top: 1rem">
+                Don't have an account?
+                <a href="/views/SignUp Page" class="login">
+                    <u>Click here to sign up!</u>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
